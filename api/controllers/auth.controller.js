@@ -87,7 +87,8 @@ export const signin = async (req, res, next) => {
       })
       // .json({ token, rest });
       // .json(rest);
-      .json({ success: true, message: "Sign in successful" });
+      // .json({ success: true, message: "Sign in successful", rest });
+      .json(rest);
   } catch (error) {
     next(error);
   }
