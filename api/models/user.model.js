@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema(
       default:
         "https://icons.veryicon.com/png/o/miscellaneous/standard/avatar-15.png",
     }, */
+
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

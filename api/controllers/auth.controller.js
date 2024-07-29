@@ -69,9 +69,16 @@ export const signin = async (req, res, next) => {
       return next(errorHandler(400, "Invalid credentials"));
     }
 
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_TIME,
-    });
+    // for more security, we assign the user for varification of admin or not in the token with variable 'isAdmin'
+    // and put in the cookie
+    // so that the user will be directed to particular dashboard
+    const token = jwt.sign(
+      { id: validUser._id, isAdmin: validUser.isAdmin },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_EXPIRES_TIME,
+      }
+    );
 
     const { password: pass, ...rest } = validUser._doc;
 
@@ -100,9 +107,13 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_TIME,
-      });
+      const token = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRES_TIME,
+        }
+      );
 
       const { password, ...rest } = user._doc;
 
@@ -131,9 +142,13 @@ export const google = async (req, res, next) => {
       });
       await newUser.save();
 
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_TIME,
-      });
+      const token = jwt.sign(
+        { id: newUser._id, isAdmin: newUser.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRES_TIME,
+        }
+      );
       const { password, ...rest } = newUser._doc;
 
       res
