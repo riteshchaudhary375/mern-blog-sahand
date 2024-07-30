@@ -178,7 +178,7 @@ const CreatePost = () => {
         <Button type="submit" gradientDuoTone="purpleToPink">
           Publish
         </Button>
-        
+
         {publishError && (
           <Alert className="mt-5" color="failure">
             {publishError}
