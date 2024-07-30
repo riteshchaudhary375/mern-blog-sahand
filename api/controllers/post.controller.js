@@ -22,7 +22,7 @@ export const create = async (req, res, next) => {
     userId: req.user.id,
   });
 
-//   console.log(newPost);
+  //   console.log(newPost);
   try {
     const savedPost = await newPost.save();
     // console.log(savedPost);
