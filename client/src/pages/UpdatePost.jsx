@@ -220,3 +220,5 @@ const UpdatePost = () => {
 };
 
 export default UpdatePost;
+
+// Create get users API route
